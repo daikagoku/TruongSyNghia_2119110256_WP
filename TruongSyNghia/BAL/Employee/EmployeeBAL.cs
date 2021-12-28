@@ -16,9 +16,9 @@ namespace TruongSyNghia.BAL.Employee
         {
             return employeeDAL.get();
         }
-        public EmployeeDTO get(String MaKH)
+        public EmployeeDTO get(String id)
         {
-            return employeeDAL.get(MaKH);
+            return employeeDAL.get(id);
         }
         public Boolean delete(EmployeeBEL employeeBEL)
         {
@@ -30,6 +30,8 @@ namespace TruongSyNghia.BAL.Employee
         }
         public Boolean post(EmployeeBEL employeeBEL)
         {
+            String id = employeeDAL.getNewID();
+            employeeBEL.id = id;
             return employeeDAL.post(employeeBEL);
         }
     }

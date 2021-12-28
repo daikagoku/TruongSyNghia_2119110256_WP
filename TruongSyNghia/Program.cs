@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using TruongSyNghia.GUI.Customer;
+using TruongSyNghia.GUI.Department;
+using TruongSyNghia.GUI.Employee;
 
 namespace TruongSyNghia
 {

@@ -23,7 +23,7 @@ drop table if exists Department
 go 
 create table Department(
 	id varchar(10)  primary key,
-	name nvarchar(30),
+	name nvarchar(30)
 )
 
 
@@ -107,3 +107,57 @@ begin
 	from Employee
 	where id like @id
 end
+
+
+go
+drop procedure if exists pr_getDepartments
+go
+create procedure pr_getDepartments 
+as
+begin
+	select id,name
+	from Department d
+end
+go
+drop procedure if exists pr_getDepartment
+go
+create procedure pr_getDepartment
+@id varchar(10)
+as
+begin
+	select id,name
+	from Department d
+	where id like @id
+end
+go
+drop procedure if exists pr_postDepartment
+go
+create procedure pr_postDepartment
+	@id varchar(10),
+	@name nvarchar(30)
+as
+begin
+	insert into Department(id,name) values(@id,@name)
+end
+go
+drop procedure if exists pr_putDepartment
+go
+create procedure pr_putDepartment
+	@id varchar(10),
+	@name nvarchar(30)
+as
+begin
+	update Department set name = @name where id like @id
+end
+
+go
+drop procedure if exists pr_deleteDepartment
+go
+create procedure pr_deleteDepartment
+	@id varchar(10)
+as
+begin
+	delete from Department where id like @id
+end
+
+select * from Employee

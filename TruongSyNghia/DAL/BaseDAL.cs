@@ -12,12 +12,17 @@ namespace TruongSyNghia.DAL
         protected SqlConnection sqlConnection;
         protected String schema = "HR";
         protected String table = "";
+        protected String primary = "";
         protected String username = "sa";
         protected String password = "12345";
         private String defaultId = "00000000";
         public BaseDAL()
         {
             sqlConnection = new SqlConnection("Data Source=localhost;Initial Catalog="+ schema + ";User Id="+ username + ";Password="+password+";");
+        }
+        public String getNewID()
+        {
+            return getNewID(primary);
         }
         public String getNewID(String id_name)
         {

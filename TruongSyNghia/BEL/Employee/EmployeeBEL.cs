@@ -14,5 +14,15 @@ namespace TruongSyNghia.BEL.Employee
         public int gender { get; set; }
         public String place_birth { get; set; }
         public String department_id { get; set; }
+
+        public EmployeeBEL()
+        {
+
+        }
+
+        public EmployeeBEL(String id)
+        {
+            this.id = id;
+        }
     }
 }

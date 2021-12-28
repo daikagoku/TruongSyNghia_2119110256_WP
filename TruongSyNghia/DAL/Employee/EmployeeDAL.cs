@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -12,13 +13,15 @@ namespace TruongSyNghia.DAL.Employee
     class EmployeeDAL : BaseDAL
     {
         public EmployeeDAL() {
+            this.primary = "id";
             this.table = "employee";
         }
         public EmployeeDTO get(String id)
         {
             EmployeeDTO employeeBEL = null;
             sqlConnection.Open();
-            SqlCommand sqlCommand = new SqlCommand("pr_getEmployeeByID @id", sqlConnection);
+            SqlCommand sqlCommand = new SqlCommand("pr_getEmployee", sqlConnection);
+            sqlCommand.CommandType = CommandType.StoredProcedure;
             sqlCommand.Parameters.Add(new SqlParameter("@id", id));
             SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
             if (sqlDataReader.HasRows)
@@ -36,6 +39,7 @@ namespace TruongSyNghia.DAL.Employee
             List<EmployeeDTO> list = new List<EmployeeDTO>();
             sqlConnection.Open();
             SqlCommand sqlCommand = new SqlCommand("pr_getEmployees", sqlConnection);
+            sqlCommand.CommandType = CommandType.StoredProcedure;
             SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
             if (sqlDataReader.HasRows)
             {
@@ -52,7 +56,8 @@ namespace TruongSyNghia.DAL.Employee
         public Boolean delete(EmployeeBEL employeeBEL)
         {
             sqlConnection.Open();
-            SqlCommand sqlCommand = new SqlCommand("pr_deleteEmployee @id", sqlConnection);
+            SqlCommand sqlCommand = new SqlCommand("pr_deleteEmployee", sqlConnection);
+            sqlCommand.CommandType = CommandType.StoredProcedure;
             sqlCommand.Parameters.Add(new SqlParameter("@id", employeeBEL.id));
             sqlCommand.ExecuteNonQuery();
             sqlConnection.Close();
@@ -60,9 +65,17 @@ namespace TruongSyNghia.DAL.Employee
         }
         public Boolean post(EmployeeBEL employeeBEL)
         {
-            employeeBEL.id = this.getNewID("id");
+
             sqlConnection.Open();
-            SqlCommand sqlCommand = new SqlCommand("pr_insertEmployee", sqlConnection);
+            SqlCommand sqlCommand = new SqlCommand("pr_postEmployee", sqlConnection);
+            sqlCommand.CommandType = CommandType.StoredProcedure;
+            sqlCommand.Parameters.Add(new SqlParameter("@id", employeeBEL.id));
+            sqlCommand.Parameters.Add(new SqlParameter("@name", employeeBEL.name));
+            sqlCommand.Parameters.Add(new SqlParameter("@date_birth", employeeBEL.date_birth));
+            sqlCommand.Parameters.Add(new SqlParameter("@place_birth", employeeBEL.place_birth));
+            sqlCommand.Parameters.Add(new SqlParameter("@gender", employeeBEL.gender));
+            sqlCommand.Parameters.Add(new SqlParameter("@department_id", employeeBEL.department_id));
+
             sqlCommand.ExecuteNonQuery();
             sqlConnection.Close();
             return true;
@@ -70,7 +83,16 @@ namespace TruongSyNghia.DAL.Employee
         public Boolean put(EmployeeBEL employeeBEL)
         {
             sqlConnection.Open();
-            SqlCommand sqlCommand = new SqlCommand("pr_updateEmployee", sqlConnection);
+
+            SqlCommand sqlCommand = new SqlCommand("pr_putEmployee", sqlConnection);
+            sqlCommand.CommandType = CommandType.StoredProcedure;
+            sqlCommand.Parameters.Add(new SqlParameter("@id", employeeBEL.id));
+            sqlCommand.Parameters.Add(new SqlParameter("@name", employeeBEL.name));
+            sqlCommand.Parameters.Add(new SqlParameter("@date_birth", employeeBEL.date_birth));
+            sqlCommand.Parameters.Add(new SqlParameter("@place_birth", employeeBEL.place_birth));
+            sqlCommand.Parameters.Add(new SqlParameter("@gender", employeeBEL.gender));
+            sqlCommand.Parameters.Add(new SqlParameter("@department_id", employeeBEL.department_id));
+
             sqlCommand.ExecuteNonQuery();
             sqlConnection.Close();
             return true;

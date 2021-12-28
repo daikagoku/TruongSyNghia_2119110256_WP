@@ -15,14 +15,24 @@ namespace TruongSyNghia.DTO.Employee
         public Boolean gender { get; set; }
         public String place_birth { get; set; }
         public String department_name { get; set; }
+
+        public EmployeeDTO()
+        {
+            
+        }
+        public EmployeeDTO(String id)
+        {
+            this.id = id;
+        }
         public EmployeeDTO(SqlDataReader sqlDataReader)
         {
             this.id = sqlDataReader["id"].ToString();
             this.name = sqlDataReader["name"].ToString();
 
-            String gender = sqlDataReader["gender"].ToString();
-            this.gender = gender.Equals("1");
+            this.gender = (Boolean)sqlDataReader["gender"];
 
+
+            this.date_birth = (DateTime)sqlDataReader["date_birth"];
             this.place_birth = sqlDataReader["place_birth"].ToString();
 
             this.department_name = sqlDataReader["department_name"].ToString();

@@ -1,5 +1,5 @@
 ﻿
-namespace TruongSyNghia.GUI.Customer
+namespace TruongSyNghia.GUI.Employee
 {
     partial class EmployeeGUI
     {
@@ -34,7 +34,7 @@ namespace TruongSyNghia.GUI.Customer
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.date_birth = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.gender = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.gender = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.place_birth = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.department_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnOut = new System.Windows.Forms.Button();
@@ -43,19 +43,18 @@ namespace TruongSyNghia.GUI.Customer
             this.btnPost = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.inputDepartment = new System.Windows.Forms.ComboBox();
+            this.inputId = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.inputPlace = new System.Windows.Forms.TextBox();
+            this.inputName = new System.Windows.Forms.TextBox();
+            this.inputGender = new System.Windows.Forms.CheckBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.label6 = new System.Windows.Forms.Label();
-            this.dgvEmployeeSource = new System.Windows.Forms.BindingSource(this.components);
+            this.inputDate = new System.Windows.Forms.DateTimePicker();
+            this.inputDepartmentSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgvEmployee)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvEmployeeSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.inputDepartmentSource)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvEmployee
@@ -75,6 +74,8 @@ namespace TruongSyNghia.GUI.Customer
             this.dgvEmployee.RowTemplate.Height = 25;
             this.dgvEmployee.Size = new System.Drawing.Size(936, 280);
             this.dgvEmployee.TabIndex = 0;
+            this.dgvEmployee.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDepartment_CellClick);
+            this.dgvEmployee.SelectionChanged += new System.EventHandler(this.dgvDepartment_SelectionChanged);
             // 
             // id
             // 
@@ -103,6 +104,8 @@ namespace TruongSyNghia.GUI.Customer
             this.gender.HeaderText = "Giới tính";
             this.gender.Name = "gender";
             this.gender.ReadOnly = true;
+            this.gender.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.gender.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // place_birth
             // 
@@ -126,6 +129,7 @@ namespace TruongSyNghia.GUI.Customer
             this.btnOut.TabIndex = 1;
             this.btnOut.Text = "Thoát";
             this.btnOut.UseVisualStyleBackColor = true;
+            this.btnOut.Click += new System.EventHandler(this.btnOut_Click);
             // 
             // btnPut
             // 
@@ -135,6 +139,7 @@ namespace TruongSyNghia.GUI.Customer
             this.btnPut.TabIndex = 2;
             this.btnPut.Text = "Sữa";
             this.btnPut.UseVisualStyleBackColor = true;
+            this.btnPut.Click += new System.EventHandler(this.btnPut_Click);
             // 
             // btnDelete
             // 
@@ -144,6 +149,7 @@ namespace TruongSyNghia.GUI.Customer
             this.btnDelete.TabIndex = 3;
             this.btnDelete.Text = "Xóa";
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnPost
             // 
@@ -153,6 +159,7 @@ namespace TruongSyNghia.GUI.Customer
             this.btnPost.TabIndex = 4;
             this.btnPost.Text = "Thêm";
             this.btnPost.UseVisualStyleBackColor = true;
+            this.btnPost.Click += new System.EventHandler(this.btnPost_Click);
             // 
             // label1
             // 
@@ -172,21 +179,21 @@ namespace TruongSyNghia.GUI.Customer
             this.label2.TabIndex = 6;
             this.label2.Text = "Đơn vị";
             // 
-            // comboBox1
+            // inputDepartment
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(74, 51);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 23);
-            this.comboBox1.TabIndex = 7;
+            this.inputDepartment.FormattingEnabled = true;
+            this.inputDepartment.Location = new System.Drawing.Point(74, 51);
+            this.inputDepartment.Name = "inputDepartment";
+            this.inputDepartment.Size = new System.Drawing.Size(121, 23);
+            this.inputDepartment.TabIndex = 7;
             // 
-            // textBox1
+            // inputId
             // 
-            this.textBox1.Location = new System.Drawing.Point(74, 13);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(121, 23);
-            this.textBox1.TabIndex = 8;
+            this.inputId.Location = new System.Drawing.Point(74, 13);
+            this.inputId.Name = "inputId";
+            this.inputId.ReadOnly = true;
+            this.inputId.Size = new System.Drawing.Size(121, 23);
+            this.inputId.TabIndex = 8;
             // 
             // label3
             // 
@@ -206,76 +213,65 @@ namespace TruongSyNghia.GUI.Customer
             this.label4.TabIndex = 10;
             this.label4.Text = "Nơi sinh";
             // 
-            // textBox2
+            // inputPlace
             // 
-            this.textBox2.Location = new System.Drawing.Point(312, 51);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(515, 23);
-            this.textBox2.TabIndex = 11;
+            this.inputPlace.Location = new System.Drawing.Point(312, 51);
+            this.inputPlace.Name = "inputPlace";
+            this.inputPlace.Size = new System.Drawing.Size(637, 23);
+            this.inputPlace.TabIndex = 11;
             // 
-            // textBox3
+            // inputName
             // 
-            this.textBox3.Location = new System.Drawing.Point(312, 13);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(190, 23);
-            this.textBox3.TabIndex = 12;
+            this.inputName.Location = new System.Drawing.Point(312, 13);
+            this.inputName.Name = "inputName";
+            this.inputName.Size = new System.Drawing.Size(257, 23);
+            this.inputName.TabIndex = 12;
             // 
-            // checkBox1
+            // inputGender
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(727, 12);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(100, 19);
-            this.checkBox1.TabIndex = 13;
-            this.checkBox1.Text = "Giới tính Nam";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.inputGender.AutoSize = true;
+            this.inputGender.Location = new System.Drawing.Point(838, 13);
+            this.inputGender.Name = "inputGender";
+            this.inputGender.Size = new System.Drawing.Size(100, 19);
+            this.inputGender.TabIndex = 13;
+            this.inputGender.Text = "Giới tính Nam";
+            this.inputGender.UseVisualStyleBackColor = true;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(524, 19);
+            this.label5.Location = new System.Drawing.Point(604, 16);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(60, 15);
             this.label5.TabIndex = 14;
             this.label5.Text = "Ngày sinh";
             // 
-            // dateTimePicker1
+            // inputDate
             // 
-            this.dateTimePicker1.Enabled = false;
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker1.Location = new System.Drawing.Point(602, 13);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(93, 23);
-            this.dateTimePicker1.TabIndex = 15;
+            this.inputDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.inputDate.Location = new System.Drawing.Point(670, 12);
+            this.inputDate.Name = "inputDate";
+            this.inputDate.Size = new System.Drawing.Size(137, 23);
+            this.inputDate.TabIndex = 15;
             // 
-            // label6
+            // inputDepartmentSource
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(525, 16);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(60, 15);
-            this.label6.TabIndex = 14;
-            this.label6.Text = "Ngày sinh";
-            // 
-            // dgvEmployeeSource
-            // 
-            this.dgvEmployeeSource.ListChanged += new System.ComponentModel.ListChangedEventHandler(this.dgvEmployeeSource_ListChanged);
+            this.inputDepartmentSource.ListChanged += new System.ComponentModel.ListChangedEventHandler(this.inputDepartmentSource_ListChanged);
             // 
             // EmployeeGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(961, 450);
-            this.Controls.Add(this.dateTimePicker1);
-            this.Controls.Add(this.label6);
+            this.Controls.Add(this.inputDate);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.checkBox1);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.inputGender);
+            this.Controls.Add(this.inputName);
+            this.Controls.Add(this.inputPlace);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.inputId);
+            this.Controls.Add(this.inputDepartment);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnPost);
@@ -287,7 +283,7 @@ namespace TruongSyNghia.GUI.Customer
             this.Text = "Nhân viên";
             this.Load += new System.EventHandler(this.EmployeeGUI_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvEmployee)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvEmployeeSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.inputDepartmentSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -302,22 +298,21 @@ namespace TruongSyNghia.GUI.Customer
         private System.Windows.Forms.Button btnPost;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.ComboBox inputDepartment;
+        private System.Windows.Forms.TextBox inputId;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.TextBox inputPlace;
+        private System.Windows.Forms.TextBox inputName;
+        private System.Windows.Forms.CheckBox inputGender;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.DateTimePicker inputDate;
+        private System.Windows.Forms.BindingSource inputDepartmentSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn name;
         private System.Windows.Forms.DataGridViewTextBoxColumn date_birth;
-        private System.Windows.Forms.DataGridViewTextBoxColumn gender;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn gender;
         private System.Windows.Forms.DataGridViewTextBoxColumn place_birth;
         private System.Windows.Forms.DataGridViewTextBoxColumn department_name;
-        private System.Windows.Forms.BindingSource dgvEmployeeSource;
     }
 }
