@@ -67,14 +67,18 @@ namespace TruongSyNghia.GUI.Employee
             inputName.Text = "";
             inputPlace.Text = "";
             inputGender.Checked = false;
-            //inputDepartment.SelectedIndex = 0;
+            if(inputDepartment.Items.Count > 0)
+            {
+                inputDepartment.SelectedIndex = 0;
+            }
+
         }
         void loadViewInput(EmployeeDTO e)
         {
             inputId.Text = e.id;
             inputName.Text = e.name;
 
-            //inputDate.Value = e.date_birth;
+            inputDate.Value = e.date_birth;
             inputPlace.Text = e.place_birth;
             inputGender.Checked = e.gender;
 
@@ -235,6 +239,11 @@ namespace TruongSyNghia.GUI.Employee
             {
                 this.Close();
             }
+        }
+
+        private void inputDepartment_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

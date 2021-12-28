@@ -186,6 +186,7 @@ namespace TruongSyNghia.GUI.Employee
             this.inputDepartment.Name = "inputDepartment";
             this.inputDepartment.Size = new System.Drawing.Size(121, 23);
             this.inputDepartment.TabIndex = 7;
+            this.inputDepartment.SelectedIndexChanged += new System.EventHandler(this.inputDepartment_SelectedIndexChanged);
             // 
             // inputId
             // 
