@@ -109,6 +109,10 @@ namespace TruongSyNghia.GUI.Employee
             {
                 MessageBox.Show("Không bỏ trống tên!!", "Thông báo");
                 return false;
+            }else if (inputPlace.Text.Equals(""))
+            {
+                MessageBox.Show("Không bỏ trống địa chỉ!!", "Thông báo");
+                return false;
             }
 
             return true;
